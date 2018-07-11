@@ -24,14 +24,14 @@ public int[] mergeSort(int[] array) {
 }
 
 private void partition(int[] array, int[] helper, int left, int right) {
-  if (left >= right) {
+	if (left >= right) {
 	  return;
-  }
-
-  int mid = left + (right - left) / 2; // to avoid overflow
-  partition(array, helper, left, mid);
-  partition(array, helper, mid + 1, right);
-  merge(array, helper, left, mid, right);
+	}
+	
+	int mid = left + (right - left) / 2; // to avoid overflow
+	partition(array, helper, left, mid);
+	partition(array, helper, mid + 1, right);
+	merge(array, helper, left, mid, right);
 }
 
 private void merge(int[] array, int[] helper, int left, int mid, int right) {
@@ -43,15 +43,15 @@ private void merge(int[] array, int[] helper, int left, int mid, int right) {
 	int j = mid + 1;
 	int idx = left;
 	while (i <= mid && j <= right) {
-	  if (helper[i] < helper[j]) {
+		if (helper[i] < helper[j]) {
 		  array[idx] = helper[i];
 		  idx++;
 		  i++;
-	  } else {
+		} else {
 		  array[idx] = helper[j];
 		  idx++;
 		  j++;
-	  }
+		}
 	}
 
 	while (i <= mid) {
