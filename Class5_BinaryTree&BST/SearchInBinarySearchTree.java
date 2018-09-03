@@ -9,34 +9,36 @@ time = O(logn)
 space = O(height) / O(1)
 */
 
-public TreeNode search(TreeNode root, int key) {
-    if (root == null) {
-        return null;
-    }
+public class Solution {
+    public TreeNode search(TreeNode root, int key) {
+        if (root == null) {
+            return null;
+        }
 
-    if (root.key == key) {
-        return root;
-    } else if (root.key > key) {
-        return search(root.left, key);
-    } else {
-        return search(root.right, key);
-    }
-}
-
-public TreeNode searchIte(TreeNode root, int key) {
-    if (root == null) {
-        return root;
-    }
-
-    TreeNode cur = root;
-    while (cur != null) {
-        if (cur.key == key) {
-        return cur;
-        } else if (cur.key > key) {
-        cur = cur.left;
+        if (root.key == key) {
+            return root;
+        } else if (root.key > key) {
+            return search(root.left, key);
         } else {
-        cur = cur.right;
+            return search(root.right, key);
         }
     }
-    return cur;
+
+    public TreeNode searchIte(TreeNode root, int key) {
+        if (root == null) {
+            return root;
+        }
+
+        TreeNode cur = root;
+        while (cur != null) {
+            if (cur.key == key) {
+                return cur;
+            } else if (cur.key > key) {
+                cur = cur.left;
+            } else {
+                cur = cur.right;
+            }
+        }
+        return cur;
+    }
 }

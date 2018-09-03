@@ -13,17 +13,19 @@ time = O(n)
 space = O(1)
 */
 
-public ListNode findMiddle(ListNode head) {
-	if (head == null || head.next == null) {
-		return head;
+public class Solution {
+	public ListNode findMiddle(ListNode head) {
+		if (head == null || head.next == null) {
+			return head;
+		}
+		ListNode slow = head, fast = head;
+		while (fast.next != null && fast.next.next != null) {
+			// fast.next != NULL不可以删
+			// 会NPE，首先保证后面的next不为空，才能fast.next.next
+			// 偶数取N4,条件换为fast != null && fast.next != null
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		return slow;
 	}
-	ListNode slow = head, fast = head;
-	while (fast.next != null && fast.next.next !=null) {
-	//fast.next != NULL不可以删
-	//会NPE，首先保证后面的next不为空，才能fast.next.next
-	//偶数取N4,条件换为fast != null && fast.next != null
-		slow = slow.next;
-		fast = fast.next.next;
-	}
-	return slow;
 }

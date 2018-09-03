@@ -33,15 +33,17 @@ time = O(1 + 4 + 16 + ... + 4^logn) = O(4^logn) = O(2^(2logn)) = O(n^2) -- worst
 space = O(height)
 */
 
-public boolean isTweakedIdentical(TreeNode one, TreeNode two) {
-	if (one == null && two == null) {
-		return true;
-	} else if (one == null || two == null) {
-		return false;
-	} else if (one.value != two.value) {
-		return false;
-	}
+public class Solution {
+  public boolean isTweakedIdentical(TreeNode one, TreeNode two) {
+    if (one == null && two == null) {
+      return true;
+    } else if (one == null || two == null) {
+      return false;
+    } else if (one.value != two.value) {
+      return false;
+    }
 
-	return isTweakedIdentical(one.left, two.left) && isTweakedIdentical(one.right, two.right) ||
-			isTweakedIdentical(one.left, two.right) && isTweakedIdentical(one.right, two.left);
+    return isTweakedIdentical(one.left, two.left) && isTweakedIdentical(one.right, two.right)
+        || isTweakedIdentical(one.left, two.right) && isTweakedIdentical(one.right, two.left);
+  }
 }

@@ -46,14 +46,16 @@ time = O(height)
 space = O(height)
  */
 
-public TreeNode insert(TreeNode root, int key) {
-	if (root == null) {
-		return new TreeNode(key);
+public class Solution {
+  public TreeNode insert(TreeNode root, int key) {
+    if (root == null) {
+      return new TreeNode(key);
     }
     if (root.key > key) {
-        root.left = insert(root.left, key);
+      root.left = insert(root.left, key);
     } else if (root.key < key) {
-		root.right = insert(root.right, key);
+      root.right = insert(root.right, key);
     }
     return root;
+  }
 }

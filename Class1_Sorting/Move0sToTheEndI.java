@@ -11,25 +11,27 @@ Examples:
 {1, 0, 3, 0, 1} --> {1, 3, 1, 0, 0} or {1, 1, 3, 0, 0} or {3, 1, 1, 0, 0}
 */
 
-public int[] moveZero(int[] array) {
-	int i = 0;
-	int j = array.length - 1;
-	while (i <= j) {
-	  if (array[i] != 0) {
-	    i++;
-	  } else if (array[j] == 0) {
-	    j--;
-	  } else {
-	    swap(array,i,j);
-	    i++;
-	    j--;
-	  }
+public class Solution {
+	public int[] moveZero(int[] array) {
+		int i = 0;
+		int j = array.length - 1;
+		while (i <= j) {
+			if (array[i] != 0) {
+				i++;
+			} else if (array[j] == 0) {
+				j--;
+			} else {
+				swap(array, i, j);
+				i++;
+				j--;
+			}
+		}
+		return array;
 	}
-	return array;
-}    
 
-private void swap(int[] array, int idx1, int idx2) {
-	int tmp = array[idx1];
-	array[idx1] = array[idx2];
-	array[idx2] = tmp;
+	private void swap(int[] array, int idx1, int idx2) {
+		int tmp = array[idx1];
+		array[idx1] = array[idx2];
+		array[idx2] = tmp;
+	}
 }

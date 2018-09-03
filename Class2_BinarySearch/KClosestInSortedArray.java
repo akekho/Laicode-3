@@ -17,53 +17,57 @@ time = O(logn + k)
 space = O(1)
 */
 
-public int[] kClosest(int[] array, int target, int k) {
-	if (array == null || array.length == 0) 	return array;
-	if (k == 0)		return new int[0];
-	//find the closest(largest smaller or equal) number to target
-	int left = 0;
-	int right = array.length - 1;
-	
-	while (left < right – 1) {
-		int mid = left + (right - left) / 2;
-		if (array[mid] == target) {
-			//如果有相等的，要找到最后一个相同的元素。
-			//也可以直接break
-			//left = mid; right= mid; break;
-			left= mid; 
-		} else if (target < array[mid]) {
-			right = mid;
-		} else {
-			left = mid;
+public class Solution {
+	public int[] kClosest(int[] array, int target, int k) {
+		if (array == null || array.length == 0)
+			return array;
+		if (k == 0)
+			return new int[0];
+		// find the closest(largest smaller or equal) number to target
+		int left = 0;
+		int right = array.length - 1;
+
+		while (left < right - 1) {
+			int mid = left + (right - left) / 2;
+			if (array[mid] == target) {
+				// 如果有相等的，要找到最后一个相同的元素。
+				// 也可以直接break
+				// left = mid; right= mid; break;
+				left = mid;
+			} else if (target < array[mid]) {
+				right = mid;
+			} else {
+				left = mid;
+			}
 		}
-	}
-	//post-processing find the closest number
-	int closeIdx = 0;
-	if (Math.abs(array[left] - target) <= Math.abs(array[right] - target)) {
-		closeIdx = left;
-	} else {
-		closeIdx = right;
-	}
-	
-	//These two should be the closest to target
-	int[] result = new int[k];
-	int l = closeIdx;
-	int r = closeIdx + 1;
-	//this is a typical merge operation
-	for (int i = 0; i < k; i++) {
-		//we can advance the left pointer when:
-		//1. right pointer is already out of bound
-		//2. right pointer is not out of bound, left pointer is not out of
-		//bound and array[left] is closer to target.
-		if (r >= array.length) {// 可以合并成两种情况
-			result[i] = array[l--];
-		} else if (l < 0){
-			result[i] = array[r++];
-		} else if (Math.abs(array[l] - target) <= Math.abs(array[r] - target)) {
-			result[i] = array[l--];
+		// post-processing find the closest number
+		int closeIdx = 0;
+		if (Math.abs(array[left] - target) <= Math.abs(array[right] - target)) {
+			closeIdx = left;
 		} else {
-			result[i] = array[r++];
+			closeIdx = right;
 		}
+
+		// These two should be the closest to target
+		int[] result = new int[k];
+		int l = closeIdx;
+		int r = closeIdx + 1;
+		// this is a typical merge operation
+		for (int i = 0; i < k; i++) {
+			// we can advance the left pointer when:
+			// 1. right pointer is already out of bound
+			// 2. right pointer is not out of bound, left pointer is not out of
+			// bound and array[left] is closer to target.
+			if (r >= array.length) {// 可以合并成两种情况
+				result[i] = array[l--];
+			} else if (l < 0) {
+				result[i] = array[r++];
+			} else if (Math.abs(array[l] - target) <= Math.abs(array[r] - target)) {
+				result[i] = array[l--];
+			} else {
+				result[i] = array[r++];
+			}
+		}
+		return result;
 	}
-	return result;
 }

@@ -14,31 +14,34 @@ time = O(logn + log(2n))
 space = O(1)
 */
 
-public int search(Dictionary dict, int target) {
-	if (dict == null)	return -1;
-	int left = 0;
-	int right = 1;
-	//find the right bound for binary search.
-	//extends until we are sure the target is within the [left, right] range.
-	while (dict.get(right) != null && dict.get(right) <= target) {
-		//1. move left to right
-		//2. double right index
-		left = right;//target一定在[2^k-1,2^k]范围内
-		right = right * 2;
-	}
-	return binarySearch(dict,left,right,target);
-}
-
-private int binarySearch(Dictionary dict, int left, int right, int target) {
-	while (left <= right) {
-		int mid = left + (right – left) / 2;
-		if (dict.get(mid) != null || dict.get(mid) > target) {//可能中点还是out of bound, 所以先写这种情况。
-			right = mid – 1;
-		} else if (target > dict.get(mid)) {
-			left = mid + 1;
-		} else {
-			return mid;
+public class Solution {
+	public int search(Dictionary dict, int target) {
+		if (dict == null)
+			return -1;
+		int left = 0;
+		int right = 1;
+		// find the right bound for binary search.
+		// extends until we are sure the target is within the [left, right] range.
+		while (dict.get(right) != null && dict.get(right) <= target) {
+			// 1. move left to right
+			// 2. double right index
+			left = right;// target一定在[2^k-1,2^k]范围内
+			right = right * 2;
 		}
+		return binarySearch(dict, left, right, target);
 	}
-	return -1;
+
+	private int binarySearch(Dictionary dict, int left, int right, int target) {
+		while (left <= right) {
+			int mid = left + (right - left) / 2;
+			if (dict.get(mid) != null || dict.get(mid) > target) {// 可能中点还是out of bound, 所以先写这种情况。
+				right = mid - 1;
+			} else if (target > dict.get(mid)) {
+				left = mid + 1;
+			} else {
+				return mid;
+			}
+		}
+		return -1;
+	}
 }

@@ -10,36 +10,38 @@ Requirements:
 No additional memory, time complexity = O(n ^ 2).
 */
 
-public Deque<Integer> sort(Deque<Integer> s1) {
-	Deque<Integer> s2 = new LinkedList<>();
-	//outer loop: control the times of iteration, i also as a count for sorted 
-	//elements. When there is only one element, no need to sort.
-	for (int i = 0; i < s1.size() - 1; i++) {
-		int localMin = Integer.MAX_VALUE;
-		int count = 0;// record the total counts of localMin
-		while (s1.size() > i) {
-		//Each time, traverse the unsorted part, find the localMin, move the 
-		//rest elements from s1 to s2
-			int tmp = s1.pop();
-			if (localMin > tmp) {
-				localMin = tmp;
-				count = 1;
-			} else if (localMin == tmp) {
-				count++;
+public class Solution {
+	public Deque<Integer> sort(Deque<Integer> s1) {
+		Deque<Integer> s2 = new LinkedList<>();
+		// outer loop: control the times of iteration, i also as a count for sorted
+		// elements. When there is only one element, no need to sort.
+		for (int i = 0; i < s1.size() - 1; i++) {
+			int localMin = Integer.MAX_VALUE;
+			int count = 0;// record the total counts of localMin
+			while (s1.size() > i) {
+				// Each time, traverse the unsorted part, find the localMin, move the
+				// rest elements from s1 to s2
+				int tmp = s1.pop();
+				if (localMin > tmp) {
+					localMin = tmp;
+					count = 1;
+				} else if (localMin == tmp) {
+					count++;
+				}
+				s2.push(tmp);
 			}
-			s2.push(tmp);
-		}
-		for (int j = 0; j < count; j++) {//push the localMin into s1
-			s1.push(localMin);
-		}
-		
-		while (!s2.isEmpty()) {
-		//move the unsorted elements from s2 to s1 
-			int tmp = s2.pop();
-			if (tmp != localMin) {
-				s1.push(tmp);
+			for (int j = 0; j < count; j++) {// push the localMin into s1
+				s1.push(localMin);
+			}
+
+			while (!s2.isEmpty()) {
+				// move the unsorted elements from s2 to s1
+				int tmp = s2.pop();
+				if (tmp != localMin) {
+					s1.push(tmp);
+				}
 			}
 		}
+		return s1;
 	}
-	return s1;
 }

@@ -10,23 +10,25 @@ time = O(n)
 space = O(1)
 */
 
-public ListNode insert(ListNode head, int index, int value) {
-	ListNode node = new ListNode(value);
-	if (head == null || index == 0) {
-		node.next = head;
-		return node;
-	}
+public class Solution {
+	public ListNode insert(ListNode head, int index, int value) {
+		ListNode node = new ListNode(value);
+		if (head == null || index == 0) {
+			node.next = head;
+			return node;
+		}
 
-	ListNode cur = head;
-	while (cur != null && index > 1) {
-		cur = cur.next;
-		index--;
-	}
+		ListNode cur = head;
+		while (cur != null && index > 1) {
+			cur = cur.next;
+			index--;
+		}
 
-	if (cur != null) {
-		node.next = cur.next;
-		cur.next = node;
+		if (cur != null) {
+			node.next = cur.next;
+			cur.next = node;
+		}
+
+		return head;
 	}
-	
-	return head;
 }

@@ -17,27 +17,29 @@ time = O(logn)
 space = O(1)
 */
 
-public int lastOccurr(int[] array, int target) {
-	if (array == null || array.lenght == 0) (
+public class Solution {
+	public int lastOccurr(int[] array, int target) {
+		if (array == null || array.lenght == 0) {
+			return -1;
+		}
+
+		int left = 0;
+		int right = array.length - 1;
+		while (left < right - 1) {// if left neighbors right  terminate
+			int mid = left + (right - left) / 2;
+			if (array[mid] <= target) {
+				left = mid;// do not stop here, keep checking to right
+			} else { // if (target < array[mid])
+				right = mid;
+			}
+		}
+
+		if (array[right] == target) {
+			return right;
+		}
+		if (array[left] == target) {
+			return left;
+		}
 		return -1;
 	}
-
-	int left = 0;
-	int right = array.length – 1;
-	while (left < right – 1) {//if left neighbors right  terminate 
-		int mid = left + (right -  left) / 2;
-		if (array[mid] <= target) {
-			left = mid;// do not stop here, keep checking to right
-		} else { //if (target < array[mid])
-			right = mid;
-		}
-	}
-
-	if (array[right] == target) {
-		return right;
-	}
-	if (array[left] == target) {
-		return left;
-	}
-	return -1;
 }

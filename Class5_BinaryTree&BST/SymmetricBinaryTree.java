@@ -36,31 +36,31 @@ time = O(1+2+4+…+n/2) < O(2*n/2) = O(n)
 space = O(height)
 */
 
-public boolean isSymmetric(TreeNode root) {
-	if (root == null) {
-		return true;
+public class Solution {
+	public boolean isSymmetric(TreeNode root) {
+		if (root == null) {
+			return true;
+		}
+		return helper(root.left, root.right);
 	}
-	return helper(root.left, root.right);
-}
 
-private boolean helper(TreeNode one, TreeNode two) {
-	if (one == null && two == null) {
-		return true;
-	} else if (one == null || two == null) {
-		return false;
-	} else if (one.key != two.key) {
-		return false;
+	private boolean helper(TreeNode one, TreeNode two) {
+		if (one == null && two == null) {
+			return true;
+		} else if (one == null || two == null) {
+			return false;
+		} else if (one.key != two.key) {
+			return false;
+		}
+		return helper(one.left, two.right) && helper(one.right, two.left);
 	}
-	return helper(one.left, two.right) && helper(one.right, two.left);
 }
 
 /**
-* public class TreeNode {
-*   public int key;
-*   public TreeNode left;
-*   public TreeNode right;
-*   public TreeNode(int key) {
-*     this.key = key;
-*   }
-* }
-*/
+ * public class TreeNode { 
+ * public int key; 
+ * public TreeNode left; 
+ * public TreeNode right; 
+ * public TreeNode(int key) { this.key = key; } 
+ * }
+ */

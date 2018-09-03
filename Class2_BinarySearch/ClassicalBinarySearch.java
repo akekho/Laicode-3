@@ -17,20 +17,23 @@ time = O(logn)
 space = O(1)
 */
 
-public int binarySearch(int[] array, int size, int target) {
-	// corner case
-	if (array == null || array.length == 0) return -1;
-	int left = 0;
-	int right = size -1;
-	while (left <= right) { // 只有一个元素的时候也不能退出，退出状态left = right+1
-		int mid = left + (right - left)/2;
-		if (array[mid] == target) {
-			return mid;
-		} else if (target < array[mid]) {
-		right = mid - 1; // 不能等于middle，会无限循环(a[]={5} ,target = 3) 违反了没有缩小范围的原则
-		} else {
-		left = mid + 1;
+public class Solution {
+	public int binarySearch(int[] array, int size, int target) {
+		// corner case
+		if (array == null || array.length == 0)
+			return -1;
+		int left = 0;
+		int right = size - 1;
+		while (left <= right) { // 只有一个元素的时候也不能退出，退出状态left = right+1
+			int mid = left + (right - left) / 2;
+			if (array[mid] == target) {
+				return mid;
+			} else if (target < array[mid]) {
+				right = mid - 1; // 不能等于middle，会无限循环(a[]={5} ,target = 3) 违反了没有缩小范围的原则
+			} else {
+				left = mid + 1;
+			}
 		}
+		return -1;
 	}
-	return -1;
 }

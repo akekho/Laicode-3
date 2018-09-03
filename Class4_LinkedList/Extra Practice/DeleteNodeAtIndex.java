@@ -11,23 +11,25 @@ time = O(n)
 space = O(1)
 */
 
-public ListNode deleteNode(ListNode head, int index) {
-	if (head == null) {
-		return null;
-	}
+public class Solution {
+	public ListNode deleteNode(ListNode head, int index) {
+		if (head == null) {
+			return null;
+		}
 
-	if (index == 0) {
-		return head.next;
-	}
+		if (index == 0) {
+			return head.next;
+		}
 
-	ListNode cur = head;
-	while (cur.next != null && index > 1) {
-		cur = cur.next;
-		index --;
+		ListNode cur = head;
+		while (cur.next != null && index > 1) {
+			cur = cur.next;
+			index--;
+		}
+		// if stop at the last node, no extra processing
+		if (cur != null && cur.next != null) {
+			cur.next = cur.next.next;
+		}
+		return head;
 	}
-	//if stop at the last node, no extra processing
-	if (cur != null && cur.next != null) {
-		cur.next = cur.next.next;
-	}
-	return head;
 }

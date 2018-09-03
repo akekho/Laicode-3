@@ -49,7 +49,7 @@ public class QueueByTwoStacks {
 	}
 
 	public boolean isEmpty() {
-		return in.isEmpty() && out.isEmpty());
+		return in.isEmpty() && out.isEmpty();
 	} 
 
 	//when out stack is empty, shuffle elements from in stack to out stack
